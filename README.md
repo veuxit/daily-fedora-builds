@@ -10,6 +10,10 @@ On Linux systems, download .isoaa and .isoab files from [releases tab](https://g
 ~~~
 cat Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoab > Fedora.x86_64-43.iso
 ~~~
+On Windows systems, run this instead:
+~~~
+copy /b Fedora.x86_64-43.isoaa + Fedora.x86_64-43.isoab Fedora.x86_64-43.iso
+~~~
 #### Note that you should be in the same directory as files you downloaded
 
 You will get the Fedora.x86_64-43.iso file with sha256sum from CHECKSUM.txt file
