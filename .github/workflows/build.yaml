@@ -1,4 +1,4 @@
-name: Build Arch Linux ISO
+name: Build Fedora 43 KDE ISO
 
 on:
   schedule:
