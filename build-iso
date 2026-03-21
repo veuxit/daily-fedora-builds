@@ -46,13 +46,17 @@ build() {
   step "Cloning kiwi ..." "
     git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f43
   "
-  step "Creating build directory..." "mkdir -p /tmp/fedora-iso/"
+  step "Creating build directory..." "
+    mkdir -p /tmp/fedora-iso/
+  "
 
   step "cd into working directory..." "
     cd fedora-kiwi-descriptions
   "
   step "Building ISO..." "
     ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir /tmp/fedora-iso/
+    ls
+    pwd
   "
   
   # Actual ISO path
@@ -60,6 +64,8 @@ build() {
 
   step "Splitting ISO file into smaller ones..." "
     split -b 1800m $ISO_PATH Fedora.x86_64-43.iso
+    ls
+    pwd
   "
 
   step "Generating sha256 text file..." "

@@ -39,7 +39,7 @@ jobs:
           name: Fedora 43 KDE ${{ env.DATE }}
           path: |
             fedora-kiwi-descriptions/Fedora.x86_64-43.isoaa
-            fedora-kiwi-descriptions/Fedora.x86_64-43.isobb
+            fedora-kiwi-descriptions/Fedora.x86_64-43.isoab
             fedora-kiwi-descriptions/CHECKSUM.txt
 
       - name: Create tag and release
@@ -48,7 +48,7 @@ jobs:
         with:
           name: Fedora 43 KDE ${{ env.DATE }}
           tag_name: ${{ env.DATE }}
-          body_path: CHECKSUMS.txt
+          body_path: CHECKSUM.txt
           files: |
             Fedora.x86_64-43.isoaa
             Fedora.x86_64-43.isobb
