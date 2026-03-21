@@ -21,4 +21,4 @@ You will get the Fedora.x86_64-43.iso file with sha256sum from CHECKSUM.txt file
 #### Why split into two files? 
 GitHub Releases file limit is only 2GB, while Fedora 43 KDE ISO size is over 3.5GB
 
-Fedora 43 KDE ISOs in here are probably same with official monthly releases but updated packages. ISOs are built with kiwi. You can check [actions](https://github.com/veuxit/daily-fedora-builds/actions) page for build output, or [workflow file](.github/workflows/build.yaml) for build stages.
+Fedora 43 KDE ISOs in here are probably same with official releases but updated packages. ISOs are built with kiwi. You can check [actions](https://github.com/veuxit/daily-fedora-builds/actions) page for build output, or [workflow file](.github/workflows/build.yaml) for build stages.
