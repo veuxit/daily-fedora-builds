@@ -10,7 +10,7 @@ On Linux systems, download .isoaa and .isoab files from [releases tab](https://g
 ~~~
 cat Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoab > Fedora.x86_64-43.iso
 ~~~
-On Windows systems, run this instead:
+On Windows systems, run this instead(cmd):
 ~~~
 copy /b Fedora.x86_64-43.isoaa + Fedora.x86_64-43.isoab Fedora.x86_64-43.iso
 ~~~
