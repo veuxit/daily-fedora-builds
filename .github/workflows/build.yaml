@@ -20,7 +20,7 @@ jobs:
       contents: write
 
     container:
-      image: archlinux:latest
+      image: fedora:latest
       options: --privileged
 
     steps:
@@ -36,18 +36,20 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'true' }}
         with:
-          name: Arch Linux ${{ env.DATE }}
+          name: Fedora 43 KDE ${{ env.DATE }}
           path: |
-            archlinux-${{ env.DATE }}-x86_64.iso
-            CHECKSUMS.txt
+            Fedora.x86_64-43.isoaa
+            Fedora.x86_64-43.isobb
+            CHECKSUM.txt
 
       - name: Create tag and release
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'false') }}
         with:
-          name: Arch Linux ${{ env.DATE }}
+          name: Fedora 43 KDE ${{ env.DATE }}
           tag_name: ${{ env.DATE }}
           body_path: CHECKSUMS.txt
           files: |
-            archlinux-${{ env.DATE }}-x86_64.iso
-            CHECKSUMS.txt
+            Fedora.x86_64-43.isoaa
+            Fedora.x86_64-43.isobb
+            CHECKSUM.txt

@@ -1,8 +1,20 @@
-# Daily Arch Builds
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adarsh-67r/daily-arch-builds/Build%20Arch%20ISO)
-![GitHub all releases](https://img.shields.io/github/downloads/adarsh-67r/daily-arch-builds/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/adarsh-67r/daily-arch-builds)
+# Daily Fedora 43 KDE Builds
+![GitHub all releases](https://img.shields.io/github/downloads/veuxit/daily-fedora-builds/total)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/aveuxit/daily-fedora-builds)
 
-In this repo, Github Actions runner builds daily Arch Linux ISO with latest packages at 00.00 UTC. [Check releases for builds.](https://github.com/adarsh-67r/daily-arch-builds/releases)
+In this repo, Github Actions runner builds daily Fedora 43 KDE ISO with latest packages at 00.00 UTC. [Check releases for builds.](https://github.com/veuxit/daily-fedora-builds/releases)
 
-ISOs are build with ArchISO's `releng` profile, which is default by Arch Linux. So Arch Linux ISOs in here is same with official monthly releases but updated packages. You can check [actions](https://github.com/adarsh-67r/daily-arch-builds/actions) page for build output, or [workflow file](.github/workflows/build.yaml) for build stages.
+# How to get ISO?
+On Linux systems, download .isoaa and .isoab files from [releases tab](https://github.com/veuxit/daily-fedora-builds/releases) the run this:
+
+~~~
+cat Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoab > Fedora.x86_64-43.iso
+~~~
+#### Note that you should be in the same directory as files you downloaded
+
+You will get the Fedora.x86_64-43.iso file with sha256sum from CHECKSUM.txt file
+
+#### Why split into two files? 
+GitHub Releases file limit is only 2GB, while Fedora 43 KDE ISO size is over 3.5GB
+
+Fedora 43 KDE ISOs in here are probably same with official monthly releases but updated packages. ISOs are built with kiwi. You can check [actions](https://github.com/veuxit/daily-fedora-builds/actions) page for build output, or [workflow file](.github/workflows/build.yaml) for build stages.
