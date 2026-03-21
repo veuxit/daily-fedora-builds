@@ -51,5 +51,5 @@ jobs:
           body_path: CHECKSUM.txt
           files: |
             Fedora.x86_64-43.isoaa
-            Fedora.x86_64-43.isobb
+            Fedora.x86_64-43.isoab
             CHECKSUM.txt
