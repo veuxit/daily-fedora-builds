@@ -59,7 +59,7 @@ build() {
   ISO_PATH=/tmp/fedora-iso/-build/Fedora.x86_64-43.iso
 
   step "Splitting ISO file into smaller ones..." "
-    split -b 1800m $ISO_PATH Fedora.x86_64-43.iso
+    split -b 2000m $ISO_PATH Fedora.x86_64-43.iso
   "
 
   step "Generating sha256 text file..." "
