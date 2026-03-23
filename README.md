@@ -1,6 +1,6 @@
 # Daily Fedora 43 KDE Builds
 ![GitHub all releases](https://img.shields.io/github/downloads/veuxit/daily-fedora-builds/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/aveuxit/daily-fedora-builds)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/veuxit/daily-fedora-builds)
 
 In this repo, Github Actions runner builds daily Fedora 43 KDE ISO with latest packages at 00.00 UTC. [Check releases for builds.](https://github.com/veuxit/daily-fedora-builds/releases)
 
