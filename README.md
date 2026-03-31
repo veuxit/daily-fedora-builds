@@ -5,7 +5,7 @@
 In this repo, Github Actions runner builds daily Fedora 43 KDE ISO with latest packages at 00.00 UTC. [Check releases for builds.](https://github.com/veuxit/daily-fedora-builds/releases)
 
 # How to get ISO?
-On Linux systems, download .isoaa and .isoab files from [releases tab](https://github.com/veuxit/daily-fedora-builds/releases) the run this:
+On Linux systems, download .isoaa and .isoab files from [releases tab](https://github.com/veuxit/daily-fedora-builds/releases) then run this:
 
 ~~~
 cat Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoab > Fedora.x86_64-43.iso
