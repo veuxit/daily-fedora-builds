@@ -51,7 +51,7 @@ build() {
   "
 
   step "Building ISO..." "
-    pushd $WORK_DIR/fedora-kiwi-descriptions
+    pushd $WORK_DIR
     ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir $WORK_DIR/output/
     popd
   "
