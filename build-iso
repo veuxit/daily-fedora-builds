@@ -41,7 +41,7 @@ step() {
 
 build() {
   step "Installing kiwi..." "
-    dnf --assumeyes install kiwi kiwi-systemdeps distribution-gpg-keys git
+    dnf --assumeyes install --setopt install_weak_deps=False kiwi kiwi-systemdeps distribution-gpg-keys git
   "
 
   WORK_DIR="$(mktemp -d --suffix="-fedora-iso")"
