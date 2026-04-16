@@ -41,29 +41,36 @@ step() {
 
 build() {
   step "Installing kiwi..." "
-    dnf --assumeyes install kiwi kiwi-systemdeps distribution-gpg-keys git
+    dnf --assumeyes install --setopt install_weak_deps=False kiwi kiwi-systemdeps distribution-gpg-keys git
   "
-  step "Cloning kiwi ..." "
-    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f43
+
+  WORK_DIR="$(mktemp -d --suffix="-fedora-iso")"
+
+  step "Cloning kiwi..." "
+    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f43 $WORK_DIR
   "
-  step "Creating build directory..." "
-    mkdir -p /tmp/fedora-iso/
-  "
+
   step "Building ISO..." "
-    pushd fedora-kiwi-descriptions
-    ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir /tmp/fedora-iso/
+    pushd $WORK_DIR
+    ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir $WORK_DIR/output/
     popd
   "
   
   # Actual ISO path
-  ISO_PATH=/tmp/fedora-iso/-build/Fedora.x86_64-43.iso
+  ISO_PATH=$WORK_DIR/output/-build/Fedora.x86_64-43.iso
 
-  step "Splitting ISO file into smaller ones..." "
-    split -b 2000m $ISO_PATH Fedora.x86_64-43.iso
+  step "Generating sha256sum text file..." "
+    sha256sum $ISO_PATH >> $WORK_DIR/CHECKSUM.txt
   "
 
-  step "Generating sha256 text file..." "
-    sha256sum $ISO_PATH >> CHECKSUM.txt
+  step "Splitting ISO file into smaller ones..." "
+    split -b 2000m $ISO_PATH $WORK_DIR/Fedora.x86_64-43.iso
+  "
+
+  step "Linking files from tmpfs to disk for uploading..." "
+    ln -sf $WORK_DIR/Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoaa 
+    ln -sf $WORK_DIR/Fedora.x86_64-43.isoab Fedora.x86_64-43.isoab
+    ln -sf $WORK_DIR/CHECKSUM.txt CHECKSUM.txt
   "
 }
 
