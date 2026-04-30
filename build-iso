@@ -44,33 +44,60 @@ build() {
     dnf --assumeyes install --setopt install_weak_deps=False kiwi kiwi-systemdeps distribution-gpg-keys git
   "
 
-  WORK_DIR="$(mktemp -d --suffix="-fedora-iso")"
+  WORK_DIR_F43="$(mktemp -d --suffix="-fedora-kde-iso-f43")"
 
-  step "Cloning kiwi..." "
-    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f43 $WORK_DIR
+  step "Cloning kiwi for f43..." "
+    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f43 $WORK_DIR_F43
   "
 
-  step "Building ISO..." "
-    pushd $WORK_DIR
-    ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir $WORK_DIR/output/
+  WORK_DIR_F44="$(mktemp -d --suffix="-fedora-kde-iso-f44")"
+
+  step "Cloning kiwi for f44..." "
+    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f44 $WORK_DIR_F44
+  "
+
+  step "Building f43 ISO..." "
+    pushd $WORK_DIR_F43
+    ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir $WORK_DIR_F43/output/
+    popd
+  "
+
+  step "Building f44 ISO..." "
+    pushd $WORK_DIR_F44
+    ./kiwi-build --kiwi-file=Fedora.kiwi --image-type=iso --image-profile=KDE-Desktop-Live --output-dir $WORK_DIR_F44/output/
     popd
   "
   
-  # Actual ISO path
-  ISO_PATH=$WORK_DIR/output/-build/Fedora.x86_64-43.iso
+  # Actual f43 ISO path
+  ISO_PATH_F43=$WORK_DIR_F43/output/-build/Fedora.x86_64-43.iso
 
-  step "Generating sha256sum text file..." "
-    sha256sum $ISO_PATH >> $WORK_DIR/CHECKSUM.txt
+  # Actual f44 ISO path
+  ISO_PATH_F44=$WORK_DIR_F44/output/-build/Fedora.x86_64-44.iso
+
+  step "Generating f43 sha256sum..." "
+    sha256sum $ISO_PATH_F43 | head -c 64 >> $WORK_DIR_F43/CHECKSUM_f43.txt
   "
 
-  step "Splitting ISO file into smaller ones..." "
-    split -b 2000m $ISO_PATH $WORK_DIR/Fedora.x86_64-43.iso
+  step "Generating f44 sha256sum..." "
+    sha256sum $ISO_PATH_F44 | head -c 64 >> $WORK_DIR_F44/CHECKSUM_f44.txt
+  "
+
+  step "Splitting f43 ISO file into smaller ones..." "
+    split -b 2000m $ISO_PATH_F43 $WORK_DIR_F43/Fedora.x86_64-43.iso
+  "
+
+  step "Splitting f44 ISO file into smaller ones..." "
+    split -b 2000m $ISO_PATH_F44 $WORK_DIR_F44/Fedora.x86_64-44.iso
   "
 
   step "Linking files from tmpfs to disk for uploading..." "
-    ln -sf $WORK_DIR/Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoaa 
-    ln -sf $WORK_DIR/Fedora.x86_64-43.isoab Fedora.x86_64-43.isoab
-    ln -sf $WORK_DIR/CHECKSUM.txt CHECKSUM.txt
+    ln -sf $WORK_DIR_F43/Fedora.x86_64-43.isoaa Fedora.x86_64-43.isoaa 
+    ln -sf $WORK_DIR_F43/Fedora.x86_64-43.isoab Fedora.x86_64-43.isoab
+    ln -sf $WORK_DIR_F43/CHECKSUM_f43.txt CHECKSUM_f43.txt
+
+    ln -sf $WORK_DIR_F44/Fedora.x86_64-44.isoaa Fedora.x86_64-44.isoaa 
+    ln -sf $WORK_DIR_F44/Fedora.x86_64-44.isoab Fedora.x86_64-44.isoab
+    ln -sf $WORK_DIR_F44/CHECKSUM_f44.txt CHECKSUM_f44.txt
   "
 }
 
