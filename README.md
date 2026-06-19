@@ -1,6 +1,6 @@
 # Daily Fedora 43 & 44 KDE Builds
 ![GitHub all releases](https://img.shields.io/github/downloads/veuxit/daily-fedora-builds/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/veuxit/daily-fedora-builds)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/veuxit/daily-fedora-builds) [![Build Fedora 43 & 44 KDE ISO](https://github.com/veuxit/daily-fedora-builds/actions/workflows/build.yaml/badge.svg)](https://github.com/veuxit/daily-fedora-builds/actions/workflows/build.yaml)
 
 ### Builds disabled
 
