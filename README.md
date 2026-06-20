@@ -2,8 +2,6 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/veuxit/daily-fedora-builds/total)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/veuxit/daily-fedora-builds) [![Build Fedora 43 & 44 KDE ISO](https://github.com/veuxit/daily-fedora-builds/actions/workflows/build.yaml/badge.svg)](https://github.com/veuxit/daily-fedora-builds/actions/workflows/build.yaml)
 
-### Builds disabled
-
 In this repo, Github Actions runner builds daily Fedora 43 & 44 KDE ISO with latest packages at 00.00 UTC. [Check releases for builds.](https://github.com/veuxit/daily-fedora-builds/releases)
 
 # How to get ISO?
