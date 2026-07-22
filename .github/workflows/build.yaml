@@ -1,4 +1,4 @@
-name: Build Fedora 43 & 44 KDE ISO
+name: Build Fedora 44 KDE ISO
 
 on:
   schedule:
@@ -14,7 +14,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 60
 
     permissions:
       contents: write
@@ -24,7 +24,7 @@ jobs:
       options: --privileged
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set current date as environment variable
         run: echo "DATE=$(date +'%d.%m.%Y')" >> "$GITHUB_ENV"
@@ -36,25 +36,19 @@ jobs:
         uses: actions/upload-artifact@v7
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'true' }}
         with:
-          name: Fedora 43 & 44 KDE ${{ env.DATE }}
+          name: Fedora 44 KDE ${{ env.DATE }}
           path: |
-            Fedora.x86_64-43.isoaa
-            Fedora.x86_64-43.isoab
             Fedora.x86_64-44.isoaa
             Fedora.x86_64-44.isoab
-            CHECKSUM_f43.txt
             CHECKSUM_f44.txt
 
       - name: Create tag and release
         uses: softprops/action-gh-release@v3
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dev == 'false') }}
         with:
-          name: Fedora 43 & 44 KDE ${{ env.DATE }}
+          name: Fedora 44 KDE ${{ env.DATE }}
           tag_name: ${{ env.DATE }}
           files: |
-            Fedora.x86_64-43.isoaa
-            Fedora.x86_64-43.isoab
             Fedora.x86_64-44.isoaa
             Fedora.x86_64-44.isoab
-            CHECKSUM_f43.txt
             CHECKSUM_f44.txt
