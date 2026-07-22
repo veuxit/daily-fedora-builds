@@ -1,0 +1,39 @@
+name: Delete Old Releases
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch: 
+
+jobs:
+  clear-releases:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Delete releases older than 2 months
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          THRESHOLD_DATE=$(date -d "2 months ago" +%Y-%m-%d)
+          echo "Delete releases, created before: $THRESHOLD_DATE"
+
+          gh release list --json tagName,createdAt,isDraft | jq -c '.[]' | while read -r row; do
+            
+            TAG=$(echo "$row" | jq -r '.tagName')
+            CREATED_AT=$(echo "$row" | jq -r '.createdAt | .[0:10]')
+            IS_DRAFT=$(echo "$row" | jq -r '.isDraft')
+
+            if [[ "$CREATED_AT" < "$THRESHOLD_DATE" ]]; then
+
+              echo "Delete: $TAG (Created: $CREATED_AT)"
+
+              gh release delete "$TAG" --yes
+              
+              git push origin --delete "$TAG"
+            fi
+          done
