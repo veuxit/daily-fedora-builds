@@ -2,7 +2,7 @@ name: Build Fedora 43 & 44 KDE ISO
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 2"
   workflow_dispatch:
     inputs:
       dev:
