@@ -47,13 +47,13 @@ build() {
   WORK_DIR_F44="$(mktemp -d --suffix="-fedora-kde-iso-f44")"
 
   step "Cloning kiwi for f44..." "
-    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f44 $WORK_DIR_F44
+    git clone --depth=1 https://forge.fedoraproject.org/releng/kiwi-descriptions.git -b f44 $WORK_DIR_F44
   "
 
   WORK_DIR_F45="$(mktemp -d --suffix="-fedora-kde-iso-f45")"
 
   step "Cloning kiwi for f45..." "
-    git clone --depth=1 https://pagure.io/fedora-kiwi-descriptions.git -b f45 $WORK_DIR_F45
+    git clone --depth=1 https://forge.fedoraproject.org/releng/kiwi-descriptions.git -b f45 $WORK_DIR_F45
   "
 
   step "Building f44 ISO..." "
